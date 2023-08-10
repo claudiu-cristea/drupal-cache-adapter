@@ -1,0 +1,66 @@
+{
+    "name": "claudiu-cristea/drupal-cache-adapter",
+    "type": "library",
+    "description": "Drupal cache adapter",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Claudiu Cristea",
+            "email": "clau.cristea@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "symfony/cache": "^6"
+    },
+    "require-dev": {
+        "behat/mink": "^1.10",
+        "composer/installers": "^2",
+        "drupal/core-composer-scaffold": ">=10.1",
+        "drupal/core-recommended": ">=10.1",
+        "drush/drush": "^12.1",
+        "mikey179/vfsstream": "~1.6",
+        "phpspec/prophecy-phpunit": "^2",
+        "phpunit/phpunit": "^9.6",
+        "squizlabs/php_codesniffer": "^3.7",
+        "symfony/phpunit-bridge": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Drupal\\Cache\\Adapter\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Drupal\\Cache\\Adapter\\Tests\\": "tests"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "installer-paths": {
+            "build/core": ["type:drupal-core"]
+        },
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "build/"
+            },
+            "file-mapping": {
+                "[project-root]/.gitattributes": false,
+                "[project-root]/.editorconfig": false,
+                "[project-root]/.gitignore": false
+            }
+        }
+    },
+    "scripts": {
+        "site:install": "./vendor/bin/drush site:install testing --root=build --sites-subdir=default --db-url=sqlite://sites/default/files/.ht.sqlite --yes",
+        "phpunit": "SIMPLETEST_DB=sqlite://sites/default/files/.ht.sqlite ./vendor/bin/phpunit -c build/core tests",
+        "phpcs": "./vendor/bin/phpcs"
+    }
+}
