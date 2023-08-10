@@ -11,6 +11,10 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "provide": {
+        "psr/cache-implementation": "3.0",
+        "symfony/cache-implementation": "3.0"
+    },
     "require": {
         "symfony/cache": "^6"
     },
